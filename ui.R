@@ -14,13 +14,10 @@ shinyUI(fluidPage(
     br(),
     sidebarLayout(
         sidebarPanel(
-            
             h5("You can generate line graphs of COVID-19 case count by selecting 
             state code (or 'All States') and the case count type from the dropdown
             lists. You can also mouse over the line graph to view daily case count."),
-            
-            hr(),
-            
+
             selectizeInput("stateInput", "State",
                            choices = unique(c("All States", state.name)),  
                            selected="All States", multiple =FALSE),
@@ -31,14 +28,15 @@ shinyUI(fluidPage(
                           "new cases"="new_case",
                           "new deaths" = "new_death"),   
                         selected="total cases", multiple =FALSE),
-            br(),
-            
+
             tags$div(
                 p(strong("Data Source: "),
                 a(href="https://data.cdc.gov/Case-Surveillance/United-States-
-                  COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36", "CDC"), "(Centers
-                  for Disease Control and Prevention)"),
-                p("*negatvie number is a correction of the pervious days")
+                  COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36", "CDC"), 
+                "(negatvie number is a correction of the pervious days)"),
+                p(strong("Github Code Source: "), 
+                a(href="https://github.com/weizhang280/ShinyApp",
+                  "https://github.com/weizhang280/ShinyApp"))
             )            
             
 ),

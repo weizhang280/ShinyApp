@@ -13,6 +13,7 @@ library(dplyr)
 
 url <- "https://raw.githubusercontent.com/weizhang280/data-sharing/main/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv"
 df <- read.csv(url)
+start.date <- '03/01/2020'
 
 shinyServer(function(input, output) {
     
@@ -20,7 +21,7 @@ shinyServer(function(input, output) {
         
         if (input$stateInput == "All States") {
             df %>% filter(state %in% state.abb
-                          & submission_date >= '03/01/2020') %>%
+                          & submission_date >= start.date) %>%
                 select(submission_date, input$caseInput) %>%               
                 group_by(submission_date) %>% summarize_all(sum)
             
@@ -28,7 +29,7 @@ shinyServer(function(input, output) {
             
             df %>% filter(state == 
                               state.abb[which(state.name == input$stateInput)] 
-                          & submission_date >= '03/01/2020') %>%
+                          & submission_date >= start.date) %>%
                 select(submission_date, input$caseInput) 
         }
     }) 
